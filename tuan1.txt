@@ -24,9 +24,13 @@ Reference:
 
 
 Notes lại và đọc bài sau
+Chiều nộp
 + SQL, CSDL quan hệ, DBMS 
 + ERD: 
 + Trình bày các mối quan hệ giữa các bảng
+
+Buổi sau chuẩn bị
 + Đọc bài 11 nguyên tắc thiết kế database
 https://james.codegym.vn/mod/page/view.php?id=9948
++ Đọc và demo truy vấn quản lý sinh viên
 
