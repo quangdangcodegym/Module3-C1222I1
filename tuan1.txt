@@ -1,0 +1,32 @@
+09/03/2023
+1. Ràng buộc là gì:
+	+ là quy tắc để quy định dữ liệu nhập vào cho bảng
+	+ đảm bảo tính chính xác, toàn vẹn của dữ liệu
+	+ Có những ràng buộc nào: primary key, foreign key, not null, default, unique,
+	check
+	
+	+ Khóa chính: unique và not null. Khóa chính đại diện 1 dòng
+	+ Khóa ngoại: 
+		- là 1 cột của bảng này tham chiếu tới khóa chính của bảng khác
+		- phải cùng kiểu dữ liệu
+		- Mục đích khóa ngoại: 
+Reference:
+	+ slice
+	+ 
+	
+2. Cách tạo bảng, tạo cột, thêm dữ liệu, xóa dữ liệu
+
+
+10/03/23
++ Bài tập về đánh lại câu lệnh bài quản lý nhập kho
++ Thêm vào mỗi bảng ít nhất 3 dòng: dùng câu lệnh
++ Vẽ ERD bài này https://james.codegym.vn/mod/assign/view.php?id=10109
+
+
+Notes lại và đọc bài sau
++ SQL, CSDL quan hệ, DBMS 
++ ERD: 
++ Trình bày các mối quan hệ giữa các bảng
++ Đọc bài 11 nguyên tắc thiết kế database
+https://james.codegym.vn/mod/page/view.php?id=9948
+
