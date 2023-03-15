@@ -34,3 +34,24 @@ Buổi sau chuẩn bị
 https://james.codegym.vn/mod/page/view.php?id=9948
 + Đọc và demo truy vấn quản lý sinh viên
 
+
+13/03/23
++ Tìm hiểu câu lệnh join, left join, right join
++ câu lệnh group by, having, where
++ Đọc và cài đăt, truy vấn db quản lý đề tài
+
+
+14/03/23
++ Đọc và làm lại các câu truy vấn trong file pdf
++ Tìm hiểu các toán tử trong mysql : LIKE, EXISTS, IN, ANY, ALL, UNION (trong file pdf cũng có đề cập)
+Lưu ý nhớ Notes lại các ý mới học được không notes một cách máy móc
+https://www.w3schools.com/mysql/mysql_in.asp
+https://www.w3schools.com/mysql/mysql_exists.asp
+https://www.w3schools.com/mysql/mysql_any_all.asp
+https://www.w3schools.com/mysql/mysql_like.asp
+https://www.w3schools.com/mysql/mysql_union.asp
+
+
+
+
+
