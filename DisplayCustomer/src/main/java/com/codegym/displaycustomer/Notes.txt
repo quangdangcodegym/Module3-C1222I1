@@ -1,0 +1,59 @@
+<%= %>          : viết mã expresstion
+<%! %>          : định nghĩa biến định nghĩa hàm
+<%  %>          : viết mã code
+
+<c:forEach>
+<c:forEach items="${requestScope.customers}" var="c">
+items: danh sách
+var: biến để chay
+
+### RequestDispatcher           là cái gì
+RequestDispatcher requestDispatcher = request.getRequestDispatcher("/customers.jsp");
+requestDispatcher.forward(request, response);
+
+### public void init()          hàm này là gì, chạy khi nào, chạy mấy lần
+
+
+
+### protected void doGet()
+
+
+### protected void doGet()
+
+
+
+### request.setAttribute("customers", customers);
+
+
+###c:if, c:choose, c:when
+<c:choose>
+    <c:when test="${c.getId()%2==0}">
+        <tr style="color: red">
+            <td>${c.getName()}</td>
+            <td>${c.getCreateAt()}</td>
+            <td>${c.getAddress()}</td>
+            <td>${c.getImage()}</td>
+        </tr>
+    </c:when>
+    <c:otherwise>
+        <tr>
+            <td>${c.getName()}</td>
+            <td>${c.getCreateAt()}</td>
+            <td>${c.getAddress()}</td>
+            <td>${c.getImage()}</td>
+        </tr>
+    </c:otherwise>
+</c:choose>
+
+### Cách import JSTL
+Thêm dependencies: JTSL vào file pom.xml
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+
+### req.getParameter("txtSearch");          là sao vậy???
+
+
+### Vòng đời của Servlet
+
+
+### Vòng đời của JSP
