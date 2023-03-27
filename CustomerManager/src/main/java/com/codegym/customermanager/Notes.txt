@@ -1,0 +1,23 @@
+ // Điều phối request
+ RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/delete.jsp");
+ requestDispatcher.forward(req, resp);
+
+ // Lấy thuộc tính action
+ //localhost:8080/customers?action=create
+ String action = req.getParameter("action");
+
+/----------------
+method: GET/POST
+action: Nếu action không có thì action là url
+input name="txtName": Trên servlet để đọc thông tin ra thì dùng request.getParameter("txtName");
+  <form method="post">
+     <div>
+       <label>Name</label>
+       <input name="txtName"  />
+     </div>
+  </form>
+
+/-------------------
+Tương tự như mình gửi 1 request mới, url thay đổi luôn
+response.sendRedirect("/customers");
+

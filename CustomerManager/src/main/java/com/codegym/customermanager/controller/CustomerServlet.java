@@ -3,6 +3,7 @@ package com.codegym.customermanager.controller;
 import com.codegym.customermanager.model.Customer;
 import com.codegym.customermanager.service.CustomerService;
 import com.codegym.customermanager.service.CustomerServiceImpl;
+import com.codegym.customermanager.service.CustomerServiceMysql;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        customerService = new CustomerServiceImpl();
+        customerService = new CustomerServiceMysql();
     }
 
     @Override

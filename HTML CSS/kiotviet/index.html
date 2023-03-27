@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12px;
+        }
+        .container{
+            padding: 0 10px;
+            display: flex;
+        }
+        .order-left{
+            width: 50%;
+        }
+        .order-right{
+            width: 50%;
+        }
+        .tab-item{
+            border: none;
+            outline: none;
+            background-color: inherit;
+            padding: 14px 16px;
+            width: 30%;
+            font-size: 1rem;
+        }
+        .tab-item:hover {
+            background-color: lightgray;
+        }
+        .btn-menu{
+            background-color: lightgray;
+            padding-top: 8px;
+        }
+        .btn-menu button{
+            margin-bottom: 4px;
+        }
+        .order-left-tab{
+            background-color: #008fd9;
+            display: flex;
+            align-items: center;
+        }
+        .order-left-tab-search{
+            display: flex;
+            justify-content: end;
+            padding: 6px;
+            flex: 0 0 30%;
+        }
+        .order-left-tab-order{
+            flex: 0 0 70%;
+        }
+        .order-left-tab input[type="search"]{
+            width: 100%;
+        }
+        .btn{
+            border-radius: 4px;
+            background-color: white;
+            border: none; /* Remove borders */
+            color: black; /* Add a text color */
+            padding: 8px 10px; /* Add some padding */
+            cursor: pointer; /* Add a pointer cursor on mouse-over */
+        }
+        .btn-primary{
+            background-color: #008fd9;
+        }
+        .success {background-color: #008fd9;} /* Green */
+        .success:hover {background-color: #008fd9;}
+        .list-foods{
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 20px;
+            background-color: lightgray;
+        }
+        .food-item{
+            width: 25%;
+            padding: 8px;
+        }
+        .food-item img{
+            width: 100%;
+        }
+        .order-right-tab{
+            display: flex;
+            align-items: center;
+            background-color: #008fd9;
+            padding-left: 4px;
+        }
+        .tab-active{
+            background-color: lightgray;
+        }
+        .icon-bar{
+            width: 70%;
+            overflow: auto;
+        }
+        .icon-bar a{
+            float: right;
+            padding: 12px 12px;
+        }
+        .icon-bar i{
+            color: white;
+        }
+        .btn-search{
+            padding: 6px 4px 6px 40px;
+            border: 1px solid #555;
+            width: 260px;
+            background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+        }
+        .btn-search:focus{
+            border: none;
+            outline: none;
+        }
+        .tb-ordered td{
+            padding: 6px; /* Add padding */
+        }
+        .tb-ordered input{
+            outline: 0;
+            border-width: 0 0 2px;
+            border-color: black;
+            width: 100%;
+            text-align: right;
+        }
+        .input-quantity{
+            width: 10%;
+        }
+        .input-price{
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="order-left">
+            <div class="order-left-tab">
+                <div class="order-left-tab-order">
+                    <button class="tab-item tab-active">PHÒNG BAN</button>
+                    <button class="tab-item">THỰC ĐƠN</button>
+
+                </div>
+                <div class="order-left-tab-search">
+                    <input type="search" class="btn-search" />
+                </div>
+            </div>
+            <div class="btn-menu">
+                <button class="btn btn-primary">Tất cả</button>
+                <button class="btn">Cafe</button>
+                <button class="btn">Cơm trưa</button>
+                <button class="btn">Hải Sản</button>
+                <button class="btn">Karaoke</button>
+                <button class="btn">Nước có cồn</button>
+                <button class="btn">Nước có ga</button>
+                <button class="btn">Sinh tố</button>
+            </div>
+            <div class="list-foods">
+                <div class="food-item">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/2/19/cach-lam-nuoc-cam-ep-ngon-va-thom-ket-hop-voi-le-va-gung-5-1645248090817401855254.jpg" alt="" srcset="">
+                    <p>Trà gừng</p>
+                    <p>14000</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/2/19/cach-lam-nuoc-cam-ep-ngon-va-thom-ket-hop-voi-le-va-gung-5-1645248090817401855254.jpg" alt="" srcset="">
+                    <p>Trà gừng</p>
+                    <p>14000</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/2/19/cach-lam-nuoc-cam-ep-ngon-va-thom-ket-hop-voi-le-va-gung-5-1645248090817401855254.jpg" alt="" srcset="">
+                    <p>Trà gừng</p>
+                    <p>14000</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/2/19/cach-lam-nuoc-cam-ep-ngon-va-thom-ket-hop-voi-le-va-gung-5-1645248090817401855254.jpg" alt="" srcset="">
+                    <p>Trà gừng</p>
+                    <p>14000</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/2/19/cach-lam-nuoc-cam-ep-ngon-va-thom-ket-hop-voi-le-va-gung-5-1645248090817401855254.jpg" alt="" srcset="">
+                    <p>Trà gừng</p>
+                    <p>14000</p>
+                </div>
+                <div class="food-item">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/2/19/cach-lam-nuoc-cam-ep-ngon-va-thom-ket-hop-voi-le-va-gung-5-1645248090817401855254.jpg" alt="" srcset="">
+                    <p>Trà gừng</p>
+                    <p>14000</p>
+                </div>
+            </div>
+        </div>
+        <div class="order-right">
+            <div class="order-right-tab">
+                <button class="tab-item tab-active"> PHÒNG 2 DH00001 <i class="fa fa-close"></i></button>
+                <div class="icon-bar">
+                    <a href="#"><i class="fa fa-search"></i></a>
+                    <a href="#"><i class="fa fa-envelope"></i></a>
+                    <a href="#"><i class="fa fa-globe"></i></a>
+                    <a href="#"><i class="fa fa-trash"></i></a>
+                </div>
+            </div>
+            <div class="order-right-search">
+                <input type="text" class="btn-search">
+            </div>
+            <div>
+                <table class="tb-ordered">
+                    <tr>
+                        <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                        <td>Trà gừng</td>
+                        <td class="input-quantity"><input type="text" value="1"></td>
+                        <td class="input-price"><input type="text" value="14000"></td>
+                        <td><label for="">14,000</label></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                        <td>Trà gừng</td>
+                        <td class="input-quantity"><input type="text" value="1"></td>
+                        <td class="input-price"><input type="text" value="14000"></td>
+                        <td><label for="">14,000</label></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                        <td>Trà gừng</td>
+                        <td class="input-quantity"><input type="text" value="1"></td>
+                        <td class="input-price"><input type="text" value="14000"></td>
+                        <td><label for="">14,000</label></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                        <td>Trà gừng</td>
+                        <td class="input-quantity"><input type="text" value="1"></td>
+                        <td class="input-price"><input type="text" value="14000"></td>
+                        <td><label for="">14,000</label></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

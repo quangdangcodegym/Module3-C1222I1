@@ -2,6 +2,7 @@ package com.codegym.customermanager.service;
 
 import com.codegym.customermanager.model.Customer;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CustomerService {
