@@ -3,3 +3,10 @@
 
 + Hoàn thiện product và customer
     - sử dụng sweetalert2: ở phần thêm, sửa, xóa
+	
+	
+	devforum.info
+	https://sweetalert2.github.io/#examples
+	
+	Nhớ chọn version mới nhất (11.7.3)
+	https://cdnjs.com/libraries/limonte-sweetalert2
