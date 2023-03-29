@@ -65,7 +65,7 @@ public class CustomerServlet extends HttpServlet {
 
         req.setAttribute("customer", c);
         req.setAttribute("customertypes", customerTypeService.findAll());
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/edit.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/edit.jsp");
         requestDispatcher.forward(req, resp);
 
     }
@@ -91,7 +91,8 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void deleteCustomer(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        long idCustomer = Long.parseLong(req.getParameter("id"));
+        String temp = req.getParameter("txtId");
+        long idCustomer = Long.parseLong(req.getParameter("txtId"));
 
         customerService.remove(idCustomer);
         resp.sendRedirect("/customers");
@@ -119,7 +120,7 @@ public class CustomerServlet extends HttpServlet {
 //        showList(req, resp);
 
 
-        resp.sendRedirect("/customers");
+        resp.sendRedirect("/customers?message=success");
     }
 
     private void createCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -136,22 +137,26 @@ public class CustomerServlet extends HttpServlet {
 
         req.setAttribute("message", "Thêm thành công");
         req.setAttribute("customertypes", customerTypeService.findAll());
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/create.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/create.jsp");
         requestDispatcher.forward(req, resp);
     }
 
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String message = req.getParameter("message");
         List<Customer> customers = customerService.findAll();
         req.setAttribute("customers", customers);
         req.setAttribute("customertypes", customerTypeService.findAll());
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/customers.jsp");
+        req.setAttribute("message", message);
+
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/customers.jsp");
         requestDispatcher.forward(req, resp);
     }
 
     private void showFormCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("customertypes", customerTypeService.findAll());
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/create.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/customer/create.jsp");
         requestDispatcher.forward(req, resp);
     }
 }

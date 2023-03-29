@@ -1,0 +1,5 @@
++ Cắt lại template admin - zicos
+--> còn thời gian thì lên devforum.info cắt thêm 1 trang admin khác
+
++ Hoàn thiện product và customer
+    - sử dụng sweetalert2: ở phần thêm, sửa, xóa
