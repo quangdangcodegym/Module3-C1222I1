@@ -10,6 +10,15 @@ public class Customer {
     private String image;
     private Date createAt;
 
+    private long customerType;
+
+    public long getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(long customerType) {
+        this.customerType = customerType;
+    }
 
     public Customer() {
 
@@ -64,12 +73,13 @@ public class Customer {
     }
 
     public Customer(long id, String name, String email,
-                    String address, String image, Date createAt) {
+                    String address, String image, Date createAt, long customerType) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
         this.image = image;
         this.createAt = createAt;
+        this.customerType = customerType;
     }
 }

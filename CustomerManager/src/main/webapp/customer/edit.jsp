@@ -39,6 +39,18 @@
     <input name="txtImage" value="${requestScope.customer.getImage()}" />
   </div>
   <div>
+    <label>Customer Types: </label>
+    <select name="sCustomerTypes">
+      <c:forEach items="${requestScope.customertypes}" var="c">
+        <option value="${c.getId()}"
+        <c:if test="${c.getId() == requestScope.customer.getCustomerType()}">
+          selected
+        </c:if>
+        >${c.getName()}</option>
+      </c:forEach>
+    </select>
+  </div>
+  <div>
     <label></label>
     <button>Edit</button>
   </div>

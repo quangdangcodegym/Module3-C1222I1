@@ -20,6 +20,7 @@
                 <th>Email</th>
                 <th>Address</th>
                 <th>Image</th>
+                <th>Customer type</th>
                 <th>Create At</th>
                 <td>Action</td>
             </tr>
@@ -32,6 +33,13 @@
                     <td>${c.getEmail()}</td>
                     <td>${c.getAddress()}</td>
                     <td>${c.getImage()}</td>
+                    <td>
+                        <c:forEach items="${requestScope.customertypes}" var="ct">
+                            <c:if test="${ct.getId() == c.getCustomerType()}">
+                                ${ct.getName()}
+                            </c:if>
+                        </c:forEach>
+                    </td>
                     <td>${c.getCreateAt()}</td>
                     <td>
                         <a href="/customers?action=create">Add</a>

@@ -2,8 +2,9 @@ package com.codegym.customermanager.controller;
 
 import com.codegym.customermanager.model.Customer;
 import com.codegym.customermanager.service.CustomerService;
-import com.codegym.customermanager.service.CustomerServiceImpl;
 import com.codegym.customermanager.service.CustomerServiceMysql;
+import com.codegym.customermanager.service.CustomerTypeMySQL;
+import com.codegym.customermanager.service.CustomerTypeService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,10 +19,12 @@ import java.util.List;
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customers")
 public class CustomerServlet extends HttpServlet {
     private CustomerService customerService;
+    private CustomerTypeService customerTypeService;
 
     @Override
     public void init() throws ServletException {
         customerService = new CustomerServiceMysql();
+        customerTypeService = new CustomerTypeMySQL();
     }
 
     @Override
@@ -61,6 +64,7 @@ public class CustomerServlet extends HttpServlet {
         Customer c = customerService.findById(idCustomer);
 
         req.setAttribute("customer", c);
+        req.setAttribute("customertypes", customerTypeService.findAll());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/edit.jsp");
         requestDispatcher.forward(req, resp);
 
@@ -101,11 +105,14 @@ public class CustomerServlet extends HttpServlet {
 
         long idCustomer = Long.parseLong(req.getParameter("id"));
 
+        long idCustomerType = Long.parseLong(req.getParameter("sCustomerTypes"));
+
         Customer customer = customerService.findById(idCustomer);
         customer.setEmail(email);
         customer.setName(name);
         customer.setAddress(address);
         customer.setImage(image);
+        customer.setCustomerType(idCustomerType);
 
         customerService.update(idCustomer, customer);
 
@@ -120,13 +127,15 @@ public class CustomerServlet extends HttpServlet {
         String email = req.getParameter("txtEmail");
         String address = req.getParameter("txtAddress");
         String image = req.getParameter("txtImage");
+        long idCustomerType = Long.parseLong(req.getParameter("sCustomerTypes"));
 //                public Customer(long id, String name, String email,
 //                    String address, String image, Date createAt)
         Customer customer = new Customer(
-                customerService.maxId() + 1, name, email, address, image, new Date());
+                customerService.maxId() + 1, name, email, address, image, new Date(), idCustomerType);
         customerService.save(customer);
 
         req.setAttribute("message", "Thêm thành công");
+        req.setAttribute("customertypes", customerTypeService.findAll());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/create.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -134,11 +143,14 @@ public class CustomerServlet extends HttpServlet {
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Customer> customers = customerService.findAll();
         req.setAttribute("customers", customers);
+        req.setAttribute("customertypes", customerTypeService.findAll());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/customers.jsp");
         requestDispatcher.forward(req, resp);
     }
 
     private void showFormCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        req.setAttribute("customertypes", customerTypeService.findAll());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/customer/create.jsp");
         requestDispatcher.forward(req, resp);
     }

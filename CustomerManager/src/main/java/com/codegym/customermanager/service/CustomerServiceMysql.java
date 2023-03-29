@@ -6,31 +6,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerServiceMysql implements CustomerService{
+public class CustomerServiceMysql extends DBContext implements CustomerService{
     private static final String SELECT_ALL_CUSTOMER = "SELECT * FROM customer";
     private static final String FIND_CUSTOMER_BY_ID = "SELECT * FROM customer where id = ?";
-    private static final String UPDATE_CUSTOMER = "UPDATE `customer` SET `name` = ?, `address` = ?, `email` = ?, `createat` = ?, `image` = ? WHERE (`id` = ?);";
+    private static final String UPDATE_CUSTOMER = "UPDATE `customer` SET `name` = ?, `address` = ?, `email` = ?, `createat` = ?, `image` = ?, `customer_type` = ? WHERE (`id` = ?);";
     private static final String DELETE_CUSTOMER = "DELETE FROM `customer` WHERE (`id` = ?);";
-    private static final String INSERT_CUSTOMER = "INSERT INTO `customer` (`name`, `address`, `email`, `createat`, `image`) VALUES (?, ?, ?, ?, ?)";
-    private String jdbcURL = "jdbc:mysql://localhost:3306/c12_customer_manager?allowPublicKeyRetrieval=true&useSSL=false";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "St180729!!";
+    private static final String INSERT_CUSTOMER = "INSERT INTO `customer` (`name`, `address`, `email`, `createat`, `image`, `customer_type`) VALUES (?, ?, ?, ?, ?, ?)";
 
 
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return connection;
-    }
+
+
     @Override
     public List<Customer> findAll() {
         List<Customer> customers = new ArrayList<>();
@@ -64,35 +49,24 @@ public class CustomerServiceMysql implements CustomerService{
         String image = rs.getString("image");
         java.sql.Date date = rs.getDate("createat");
 
+        long idCustomerType = rs.getLong("customer_type");
+
         Date createAt = new Date(date.getTime());
 
         //public Customer(long id, String name, String email,
         //                    String address, String image, Date createAt)
-        Customer customer = new Customer(id, name, email, address, image, createAt);
+        Customer customer = new Customer(id, name, email, address, image, createAt, idCustomerType);
         return customer;
     }
 
-    private void printSQLException(SQLException ex) {
-        for (Throwable e : ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
-        }
-    }
+
     @Override
     public void save(Customer customer) {
         Connection connection = getConnection();
 
 
-        //INSERT INTO customer` (`name`, `address`, `email`, `createat`, `image`) VALUES (?, ?, ?, ?, ?)";
+//        "INSERT INTO `customer` (`name`, `address`, `email`, `createat`,
+//        `image`, `customer_type`) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMER);
             preparedStatement.setString(1, customer.getName());
@@ -100,6 +74,7 @@ public class CustomerServiceMysql implements CustomerService{
             preparedStatement.setString(3, customer.getEmail());
             preparedStatement.setDate(4, new java.sql.Date(customer.getCreateAt().getTime()));
             preparedStatement.setString(5, customer.getImage());
+            preparedStatement.setLong(6, customer.getCustomerType());
 
             preparedStatement.executeUpdate();
 
@@ -136,8 +111,8 @@ public class CustomerServiceMysql implements CustomerService{
         Connection connection = getConnection();
 
         try {
-            //UPDATE `customer` SET `name` = ?, `address` = ?, `email` = ?,
-            // `createat` = ?, `image` = ? WHERE (`id` = ?);";
+//            UPDATE `customer` SET `name` = ?, `address` = ?, `email` = ?,
+//            `createat` = ?, `image` = ?, `customer_type` = ? WHERE (`id` = ?);";
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CUSTOMER);
             preparedStatement.setString(1, customer.getName());
             preparedStatement.setString(2, customer.getAddress());
@@ -145,7 +120,8 @@ public class CustomerServiceMysql implements CustomerService{
             preparedStatement.setDate(4, (Date) customer.getCreateAt());
             preparedStatement.setString(5, customer.getImage());
 
-            preparedStatement.setLong(6, id);
+            preparedStatement.setLong(6, customer.getCustomerType());
+            preparedStatement.setLong(7, customer.getId());
 
             preparedStatement.executeUpdate();
 

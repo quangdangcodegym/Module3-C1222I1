@@ -38,6 +38,14 @@
         <label>Image</label>
         <input name="txtImage"  />
       </div>
+        <div>
+            <label>Customer Types: </label>
+            <select name="sCustomerTypes">
+                <c:forEach items="${requestScope.customertypes}" var="c">
+                    <option value="${c.getId()}">${c.getName()}</option>
+                </c:forEach>
+            </select>
+        </div>
       <div>
         <label></label>
         <button>Create</button>
