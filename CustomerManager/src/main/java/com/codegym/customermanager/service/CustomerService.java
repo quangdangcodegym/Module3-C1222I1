@@ -8,6 +8,10 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> findAll();
 
+    List<Customer> findByKwAndFilter_Pagging(int offset, int limit, String kw, int customerType);
+
+
+    int getNoOfRecords();
     void save(Customer customer);
 
     Customer findById(long id);

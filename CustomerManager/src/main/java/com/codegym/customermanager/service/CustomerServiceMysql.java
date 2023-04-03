@@ -12,9 +12,20 @@ public class CustomerServiceMysql extends DBContext implements CustomerService{
     private static final String UPDATE_CUSTOMER = "UPDATE `customer` SET `name` = ?, `address` = ?, `email` = ?, `createat` = ?, `image` = ?, `customer_type` = ? WHERE (`id` = ?);";
     private static final String DELETE_CUSTOMER = "DELETE FROM `customer` WHERE (`id` = ?);";
     private static final String INSERT_CUSTOMER = "INSERT INTO `customer` (`name`, `address`, `email`, `createat`, `image`, `customer_type`) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String FIND_CUSTOMERS_BY_KW_AND_FILTER_PAGGING_ALL = "SELECT SQL_CALC_FOUND_ROWS  *   FROM customer where `name` like ?  limit ?,?;";
+    private static final String FIND_CUSTOMERS_BY_KW_AND_FILTER_PAGGING = "SELECT SQL_CALC_FOUND_ROWS  *   FROM customer where `name` like ? and customer_type = ?  limit ?,?;";
 
 
+    private int noOfRecords;
 
+
+    public int getNoOfRecords() {
+        return noOfRecords;
+    }
+
+    public void setNoOfRecords(int noOfRecords) {
+        this.noOfRecords = noOfRecords;
+    }
 
     @Override
     public List<Customer> findAll() {
@@ -37,6 +48,41 @@ public class CustomerServiceMysql extends DBContext implements CustomerService{
 //            preparedStatement.close();
         } catch (SQLException e) {
             printSQLException(e);
+        }
+        return customers;
+    }
+
+    @Override
+    public List<Customer> findByKwAndFilter_Pagging(int offset, int limit, String kw, int customerType) {
+        List<Customer> customers = new ArrayList<>();
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement;
+            if (customerType == -1) {
+                preparedStatement = connection.prepareStatement(FIND_CUSTOMERS_BY_KW_AND_FILTER_PAGGING_ALL);
+                preparedStatement.setString(1,'%' + kw + '%');
+                preparedStatement.setInt(2, offset);
+                preparedStatement.setInt(3, limit);
+            }else{
+                preparedStatement =  connection.prepareStatement(FIND_CUSTOMERS_BY_KW_AND_FILTER_PAGGING);
+                preparedStatement.setString(1,'%' + kw + '%');
+                preparedStatement.setInt(2, customerType);
+                preparedStatement.setInt(3, offset);
+                preparedStatement.setInt(4, limit);
+            }
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Customer customer = getCustomerFromResultSet(rs);
+                customers.add(customer);
+            }
+
+            rs = preparedStatement.executeQuery("select FOUND_ROWS()");
+            while (rs.next()) {
+                noOfRecords = rs.getInt(1);
+            }
+            preparedStatement.close();
+        } catch (SQLException sqlException) {
+            printSQLException(sqlException);
         }
         return customers;
     }
